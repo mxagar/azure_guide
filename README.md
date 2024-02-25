@@ -74,6 +74,10 @@ Table of contents:
     - [Azure Cost Management](#azure-cost-management)
     - [Resource Tags](#resource-tags)
   - [9. Governance and Compliance](#9-governance-and-compliance)
+    - [Azure Blueprints](#azure-blueprints)
+    - [Azure Policy](#azure-policy)
+    - [Resource Locks](#resource-locks)
+    - [Microsoft Purview](#microsoft-purview)
   - [10. Tools for Managing Deployments](#10-tools-for-managing-deployments)
   - [11. Monitoring](#11-monitoring)
   - [12. Basic Demos](#12-basic-demos)
@@ -1168,7 +1172,101 @@ Example tags:
 
 ## 9. Governance and Compliance
 
+Governance: composed by the management leaders; those leaders decide to adopt some IT policies; for instance: always have a daily backup. How can we inforce that policy?
+
+- Option 1: Send an email to all employees and hope that they follow the policies
+- Option 2: Use Azure tools to enforce rules; we can also audit for compliance.
+
+There are several Azure tools to support **Governance and Compliance**:
+
+- Azure Blueprints
+- Azure Policy
+- Resource Locks
+- Microsoft Purview
+
+### Azure Blueprints
+
+Azure Blueprints = Templates for Azure Subscriptions with pre-defined Roles and Policies.
+
+![Azure Blueprints](./assets/azure_blueprints.jpg)
+
+Blueprints are the only way to assign *deny permissions*; the rest of the methods assign only *allow permissions*.
+
+### Azure Policy
+
+Main policy enforcement tool.
+
+We can create rules that apply to sets of Azure resources (different scopes).
+
+We can evaluate compliance to the rules.
+
+Examples of built-in policies:
+
+- Require SQL server version
+- Alloeed storage account SKUs
+- Allowed locations
+- Allowed VM SKUs
+- Apply tags and default values
+- Not allowed resource types
+
+Custom policies are created in JSON format.
+
+Look for **Policy** in search bar; in `Definitions` tab (left menu):
+
+- We see +1k standard policy definitions
+- We can filter by keywords, e.g. backup
+- If we click on one, we see it's defined as a JSON, which can be copied and modified; in any case, we can also use the web UI to define the policy by clicking on `Assign` and going through the condiguration panels.
+- If we click on `Assign` after having selected a policy template, a configuration menu/panel with different tabs is opened
+  - Basics:
+    - Assign to a scope: subscription, resource group, etc.
+    - Exclude resources or not
+    - Turn on/off
+  - Advanced
+  - Remediation: by default, only applied to new resource groups, or require also from old?
+  - ...
+  - Then, we create the policy and it's done!
+
+### Resource Locks
+
+We can enforce locks to resources:
+
+- Read only: make a resource only readable, we cannot change it.
+- Cannot delete: we can change the resource, but not delete it.
+
+To use it: we go to a resource (e.g., a VM), select `Locks` (left menu), and `Add` one. Then, we select the lock type: Read-only, Delete (= Cannot-Delete).
+
+![Locks](./assets/locks.jpg)
+
+If we activate the *Delete* lock and try to delete the resource, an error occurs. If we remove the lock, we can delete the resource; the trick is to assign permissions of add/removing locks only to given users/roles.
+
+### Microsoft Purview
+
+It allows **Unified Data Governance**. It has 9 features:
+
+- Auditing data
+- Communication compliance
+- Data mapping and cataloguing: where is the data, where it comes from
+- eDiscovery
+- Information protection
+- Insider Risk Management
+- Data Lifecycle Management: how do you handle data from creation to archiving
+- Data Loss Prevention
+- Compliance manager: dashboard which evaluates company in terms of data protection
+
+Example: Communication Compliance; every company has communication rules. Let's take as example a finance company.
+
+- The traders department and teh analysts deparment might be incommunicated: we need communications firewall.
+- Also, people who work with Visa and Mastercard account within a company might be incommunicated.
+
+We might want to enforce content communication compliance: avoid inappropriate content, etc.
+
+Similarly, sometimes data can be classified as *secret*, *protected*, etc. For given classifications, we can track where those data were distributed.
+
+Another example: someone is fired; if the account is not immediately blocked/restricted, that person might do some bad things because they are angry: delete data, say something offensive/bad to colleagues in company channels, etc.
+
 ## 10. Tools for Managing Deployments
+
+
 
 ## 11. Monitoring
 
