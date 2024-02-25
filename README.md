@@ -1,8 +1,8 @@
-# A Guide to Azure with Focus on Machine Learning
+# A Guide to Microsoft Azure
 
 These notes collect the basics related to using the Azure cloud services.
 
-Some of them were written after following the Udemy tutorial/course by Scott Duffy
+Some of them were written after following the Udemy tutorial/course by Scott Duffy:
 
 [AZ-900: Microsoft Azure Fundamentals Exam Prep](https://www.udemy.com/course/az900-azure/)
 
@@ -12,7 +12,7 @@ Mikel Sagardia, 2024.
 No guarantees.
 
 Table of contents:
-- [A Guide to Azure with Focus on Machine Learning](#a-guide-to-azure-with-focus-on-machine-learning)
+- [A Guide to Microsoft Azure](#a-guide-to-microsoft-azure)
   - [1. Introduction](#1-introduction)
   - [2. Cloud Computing and Its Benefits](#2-cloud-computing-and-its-benefits)
     - [Shared Responsibility Model](#shared-responsibility-model)
@@ -64,6 +64,9 @@ Table of contents:
     - [Multi-Factor Authentication (MFA)](#multi-factor-authentication-mfa)
     - [Passwordless](#passwordless)
     - [Role-Based Access Control (RBAC)](#role-based-access-control-rbac)
+    - [Zero-Trust Methodology](#zero-trust-methodology)
+    - [Defense in Depth](#defense-in-depth)
+    - [Microsoft Defender for Cloud](#microsoft-defender-for-cloud)
   - [8. Cost Management](#8-cost-management)
   - [9. Governance and Compliance](#9-governance-and-compliance)
   - [10. Tools for Managing Deployments](#10-tools-for-managing-deployments)
@@ -978,7 +981,82 @@ How is that achieved?
 
 ### Role-Based Access Control (RBAC)
 
+MS's preferred solution. We create roles that represent the common tasks of the job:
 
+- Developer
+- Developer manager
+- HR
+- Finance
+- etc.
+
+We assign quite granular permission for each role; then, the unwanted effects are fewer, even if the user does something unexpected or we get hacked.
+
+Once the roles have been created, we assigne users to roles; we can assign users to more than one role.
+
+That makes easier also to handle many users: we define roles very specifically, and then new users are simply assigned roles.
+
+Typical standard roles:
+
+- Reader: read only.
+- Contributor: read & write.
+- Owner: ability to give permissions to other people.
+
+### Zero-Trust Methodology
+
+Analogy of the house: usually we lock the front door of the house, once we have the key, inside we don't have any more locks. With the Zero-Trust methodology, we need keys to every room, closet, etc.
+
+The house front-door would be the Firewall; thus, we won't assume that behind the FW everything is secure. Instead, if an app is trying to use another one behind the FW, we'll ensure security measures to do it so: we'll require specific keys for that.
+
+Three Zero-Trust principles:
+
+- Verify explicitly: use every available method to  identify
+- Use least privileged access
+  - Just-in-time: grant access just then
+  - Just-enough-access: grant only the minimum access required
+- Assume breach has happened
+  - Apply: Encryption, segmentation, threat detection (patterns: e.g., if a user downloads all code)
+
+The MS Security Policy Enforcement diagram:
+
+![Security Policy Enforcement](./assets/security_policy_enforcement.jpg)
+
+- Identity verify and secure each identity
+- Devices: check they are valid (compliance), i.e., updated versions, etc.
+- Applications: monitor user actions (e.g., is user downloading complete code?)
+- Data: protection, encrypt, restrict access
+- Network: encryption
+- Infrastructure: monitor to detect attacks, flag, report, etc.
+
+### Defense in Depth
+
+This concept consists in applying the security in different layers, not only the user id + PW. Seven security layers:
+
+- Data - i.e. virtual network endpoint
+- Application - i.e. API Management
+- Compute - i.e. Limit Remote Desktop access, Windows Update
+- Network - i.e. NSG, use of subnets, deny by default
+  - NSG: Network Security Groups
+- Perimeter - i.e. DDoS, firewalls
+- Identity & access - i.e. Azure AD
+- Physical - i.e. Door locks and key card
+
+For each layer, we have several tools, and we should have at least one good of them active in each layer. We don't need to learn them for the exam.
+
+![Defense in Depth Tools](./assets/defense_in_depth_tools.jpg)
+
+### Microsoft Defender for Cloud
+
+Microsoft Defender for Cloud is a service we can pay to protect different resources.
+
+![Cloud Defender](./assets/cloud_defender.jpg)
+
+The service has a different cost for each resource.
+
+We can do many things:
+
+- Reports and suggestions related to the current protection status
+- Apply recommendations automatically
+- ...
 
 ## 8. Cost Management
 
@@ -1466,14 +1544,36 @@ A storage is created whenever we enable the Azure Cloud Shell. That storage pers
 
 ## Extra: Azure CLI
 
+TBD, not part of the AZ-900 course/exam.
+
+:construction:
+
 ## Extra: Azure Blob Storage
+
+TBD, not part of the AZ-900 course/exam.
+
+:construction:
 
 ## Extra: Azure Cognitive Search
 
+TBD, not part of the AZ-900 course/exam.
+
+:construction:
+
 ## Extra: Azure Form Recognizer
+
+TBD, not part of the AZ-900 course/exam.
+
+:construction:
 
 ## Extra: Azure Keyvaluts
 
+TBD, not part of the AZ-900 course/exam.
+
+:construction:
+
 ## Extra: Azure OpenAI
 
+TBD, not part of the AZ-900 course/exam.
 
+:construction:
