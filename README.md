@@ -79,6 +79,10 @@ Table of contents:
     - [Resource Locks](#resource-locks)
     - [Microsoft Purview](#microsoft-purview)
   - [10. Tools for Managing Deployments](#10-tools-for-managing-deployments)
+    - [Azure Portal and Command Line Tools](#azure-portal-and-command-line-tools)
+    - [Azure Arc](#azure-arc)
+    - [Infrasturcture as Code (IaC)](#infrasturcture-as-code-iac)
+    - [ARM Templates, Azure Resource Management](#arm-templates-azure-resource-management)
   - [11. Monitoring](#11-monitoring)
   - [12. Basic Demos](#12-basic-demos)
     - [Create a Virtual Machine (VM)](#create-a-virtual-machine-vm)
@@ -94,8 +98,8 @@ Table of contents:
       - [AzCopy: Programmatic Copy of Storage Elements](#azcopy-programmatic-copy-of-storage-elements)
   - [13. Examples](#13-examples)
   - [Extra: Spending Limits](#extra-spending-limits)
+  - [Extra: Azure CLI/SDK](#extra-azure-clisdk)
   - [Extra: Azure Cloud Shell](#extra-azure-cloud-shell)
-  - [Extra: Azure CLI](#extra-azure-cli)
   - [Extra: Azure Blob Storage](#extra-azure-blob-storage)
   - [Extra: Azure Cognitive Search](#extra-azure-cognitive-search)
   - [Extra: Azure Form Recognizer](#extra-azure-form-recognizer)
@@ -1266,7 +1270,24 @@ Another example: someone is fired; if the account is not immediately blocked/res
 
 ## 10. Tools for Managing Deployments
 
+### Azure Portal and Command Line Tools
 
+- Azure Portal: Web UI
+- Azure CLI SDK: [How to install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+  - We can use it to write scripts, e.g., to create VMs, etc.
+  - Then, all those scripts can be source-controlled.
+- Azure Cloud Shell: Powershell or Bash CLI
+  - Terminal built-in to Azure Portal
+
+See [Extra: Azure CLI/SDK](#extra-azure-clisdk) with example commands.
+
+### Azure Arc
+
+
+
+### Infrasturcture as Code (IaC)
+
+### ARM Templates, Azure Resource Management
 
 ## 11. Monitoring
 
@@ -1740,44 +1761,89 @@ Select Subscription > Budgets: Create/Add one; for instance:
 - Alerts: add one, e.g., 90% of actual
 - Alert emails: xxx
 
+## Extra: Azure CLI/SDK
+
+Not part of the AZ-900 course/exam.
+
+Important links:
+
+- Azure CLI SDK: [How to install the Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
+- [Azure CLI onboarding cheat sheet](https://learn.microsoft.com/en-us/cli/azure/cheat-sheet-onboarding)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
+
+In the following, some handy commands of the Azure CLI/SDK are shown.
+
+Usually, we'd use them in scripts.
+
+```bash
+# Set proxy, if required.
+# Log out, just in case we're logged in with another account
+az logout
+ 
+# Log in via web: Browser is automatically opened
+az login
+ 
+# Get Object ID = User ID: Value in field "id"
+az ad signed-in-user show
+
+# List all Azure Function Apps
+az functionapp list
+
+# List all Azure Web Apps
+az webapp list
+
+# Create a ne wresource group
+# After the command, we should see it in the Azure portal
+az group create --name rg-newrg --location eastus
+
+# Create a VM
+# There is a command which lists all images
+az vm create  --resource-group rg-newrg --name newvm --image Win2019Datacenter --public-ip-sku Standard --admin-username azmsuser
+# Then, a PW is asked; note that we chose Windows, which requires username and password
+
+# Open the port 80 of the VM
+az vm open-port --port 80 --resource-group rg-newrg --name newvm
+
+# Delete a resource group and all its contents
+az group delete --name rg-newrg
+```
+
 ## Extra: Azure Cloud Shell
+
+Not part of the AZ-900 course/exam.
 
 [Azure Cloud Shell Tutorial - Adam Marczak](https://www.youtube.com/watch?v=If4g2vVaiYk)
 
+The Azure Cloud Shell is a Terminal that can be opened from the Azure Portal; the Azure CLI SDK is installed in there and we can used both PowerShell and Bash CLI.
+
 A storage is created whenever we enable the Azure Cloud Shell. That storage persists across different Cloud Shell sessions, so we can have different scripts stored in it, associated to our account. The Azure Cloud Shell is free, but the storage not; however, the cost should be minimal if we don't save many things in it.
-
-## Extra: Azure CLI
-
-TBD, not part of the AZ-900 course/exam.
-
-:construction:
 
 ## Extra: Azure Blob Storage
 
-TBD, not part of the AZ-900 course/exam.
+Not part of the AZ-900 course/exam.
 
 :construction:
 
 ## Extra: Azure Cognitive Search
 
-TBD, not part of the AZ-900 course/exam.
+Not part of the AZ-900 course/exam.
 
 :construction:
 
 ## Extra: Azure Form Recognizer
 
-TBD, not part of the AZ-900 course/exam.
+Not part of the AZ-900 course/exam.
 
 :construction:
 
 ## Extra: Azure Keyvaluts
 
-TBD, not part of the AZ-900 course/exam.
+Not part of the AZ-900 course/exam.
 
 :construction:
 
 ## Extra: Azure OpenAI
 
-TBD, not part of the AZ-900 course/exam.
+Not part of the AZ-900 course/exam.
 
 :construction:
