@@ -59,6 +59,11 @@ Table of contents:
     - [Azure Data Box](#azure-data-box)
   - [7. Identity, Access and Security](#7-identity-access-and-security)
     - [Microsoft Entra: Benefits](#microsoft-entra-benefits)
+    - [Authetication vs Authoraization](#authetication-vs-authoraization)
+    - [Azure AD Conditional Access](#azure-ad-conditional-access)
+    - [Multi-Factor Authentication (MFA)](#multi-factor-authentication-mfa)
+    - [Passwordless](#passwordless)
+    - [Role-Based Access Control (RBAC)](#role-based-access-control-rbac)
   - [8. Cost Management](#8-cost-management)
   - [9. Governance and Compliance](#9-governance-and-compliance)
   - [10. Tools for Managing Deployments](#10-tools-for-managing-deployments)
@@ -898,6 +903,81 @@ This new approach is much more secure and saves a lot of work to the programmers
 ![Authentication: Azure Active Directory and Entra](./assets/authentication_aad.jpg)
 
 ### Microsoft Entra: Benefits
+
+- Security
+  - More secure than hand-crafted solutions
+  - MS is world-leader in secure identifications
+- Reduced development time (very few lines) and easier support (MS offers support)
+- Additional features
+  - AI used to look at login patterns
+  - Audit features
+- Centralized administration
+  - We have a central dashboard where we can manage the access of all users
+- Single sign-on
+  - We can user corporate log in data, or even social media log in data
+  - Not need of creating extra credentials
+- Integrates with other Azure services: VMs, storage, etc.
+
+### Authetication vs Authoraization
+
+In a nutshell:
+
+- Authentication: user proving who they are, user id & PW.
+- Authorization: ensure that user is allowed/permitted to perform an action.
+  - Permissions: read, writen, admin, etc.
+  - Usually, we should avoid giving admin priviledge.
+
+### Azure AD Conditional Access
+
+A typical way an account is hacked is when the hacker finds out the credentials of an user id; those hackers are usually somewhere else in the world. Therefore, we can start defining different levels of trust, or conditions, to accept the credentials:
+
+- User A attempts to log in from an app **inside the company office**, as everyday, vs. they try to log in with an IP in Afghanistan; in the latter case, we might use an additional MFA step (send text message with a code).
+- User B attempts to **log in for the first time in 4 months**: in that case, we should be more careful.
+- User C is **administrator**: in those cases, we should be extra careful.
+  - If the log in IP is far away from the office, we can be paranoid.
+
+In summary, the *conditional access* tags each login as *routine* or *not normal*, and depending on the tag, more or less verifications need to be passed; after those verifications, Azure AD can enforce the action to:
+
+- Allow access
+- Allow limited access
+- Deny access
+- Block account
+- ...
+
+### Multi-Factor Authentication (MFA)
+
+We have 3 additional factors (or pieces of evidence) we can require to authenticate:
+
+- Something you know, i.e., password.
+  - Can be hacked, not that secure; thus, companies ask to change PW frequently.
+- Something you have, i.e., mobile phone, access to email account.
+  - We receive a code via another mean, which is something additional we own.
+- Something you are (typially biological), i.e., fingerprint, face.
+  - The problem with this type of authentication is that we cannot change it.
+
+Azure has 4 types of MFA:
+
+- Authenticator App
+- Email
+- SMS
+- Phone call
+
+### Passwordless
+
+MS is promoting another type of authentication than MFA: **Passwordless**.
+
+If plotted in a plane of 2 dimensions (security and convenience), it's in the best quadrant.
+
+![Passwordless authentication](./assets/passwordless.jpg)
+
+How is that achieved?
+
+- Gestures in a given device
+- Face, fingerprint in a given device
+- Sometimes we are logged in or haven been logged in some minutes ago in a device and try to open a new service, and instead of requiring a PW, the Authenticator might require us a code sent to the browser.
+
+### Role-Based Access Control (RBAC)
+
 
 
 ## 8. Cost Management
