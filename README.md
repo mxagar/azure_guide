@@ -68,6 +68,11 @@ Table of contents:
     - [Defense in Depth](#defense-in-depth)
     - [Microsoft Defender for Cloud](#microsoft-defender-for-cloud)
   - [8. Cost Management](#8-cost-management)
+    - [Factors Affecting Cost](#factors-affecting-cost)
+    - [Azure Pricing Caltulator](#azure-pricing-caltulator)
+    - [Total Cost of Ownership Calculator](#total-cost-of-ownership-calculator)
+    - [Azure Cost Management](#azure-cost-management)
+    - [Resource Tags](#resource-tags)
   - [9. Governance and Compliance](#9-governance-and-compliance)
   - [10. Tools for Managing Deployments](#10-tools-for-managing-deployments)
   - [11. Monitoring](#11-monitoring)
@@ -1059,6 +1064,107 @@ We can do many things:
 - ...
 
 ## 8. Cost Management
+
+### Factors Affecting Cost
+
+- Free services
+  - Resource groups
+  - Virtual Networks (up to 50)
+  - Load balancers (basic)
+  - Azure Active Directory (basic)
+  - Network Security Groups
+  - Free-tier web apps (up to 10)
+- Rest of services: we need to pay depending on different factors, such as:
+  - Time
+  - Number of executions
+  - Amount of data consume
+  - Backup costs
+  - Number of regions
+  - ...
+
+Models:
+
+- Pay-per-use
+  - Azure Functions
+    - 1 million executions free per month
+    - Then, 0.2 USD per million execution
+    - In contrast, if we used the cheapest VM instead of Functions, the minimum cost would be 20 USD/month
+  - Logic Apps
+  - Storage (pay per GB)
+  - Outbound bandwidth
+  - Cognitive Services API
+- Pay-per-time (charged by the second)
+  - Example: VMs
+  - We might want stability in pricing (esp. the Finance department); since cloud costs are unpredictable sometimes, we can in some cases pay/reserve upfront for 1-3 years of a VM usage, for instance.
+- Pay-for-bandwidth:
+  - Typical: first 5GB free
+  - Inbound data is free.
+  - Depending on the regions, the pricing is different.
+  - Example: if we want to download/transfer 1 PB of data, the cost in data transfer will be 52k USD! When happens that? For instance, when we want to move freom Azure to AWS.
+
+### Azure Pricing Caltulator
+
+Pricing Calculartor: [Azure Pricing Calculator](https://azure.microsoft.com/en-us/pricing/calculator/)
+
+The tool is used for educated guesses: we don't get perfect estimates.
+
+Configurable options: Region, Tier, Subscription Type, Support Options, Dev/Test Pricing, etc.
+
+It has the feeling of a shopping cart, where we configure the products we'd like, we get a price and we can export/share the budget:
+
+- We select several services/resources: VM, storage, etc.
+- We configure them: region, tier, usage, reservations, licenses, etc.
+
+### Total Cost of Ownership Calculator
+
+The cost of running a server has other costs that are not explicitly mentions:
+
+- Electricity
+- Colling
+- Internet connectivity
+- Rack space (buildings)
+- Setup labor
+- Maintenance labor
+- Backup
+- etc.
+
+MS has a calculator which measures those extra costs as a way to show the trade-off of using cloud computing:
+
+[Total Cost of Ownership Calculator](https://azure.microsoft.com/en-us/pricing/tco/calculator/)
+
+Similarly as before, we define our data center:
+
+- Number of servers
+- Storage
+- etc.
+
+At the end, we get
+
+- What we would save if used Azure, according to MS
+- The cost over time projection: with on-prem model and using Azure
+
+### Azure Cost Management
+
+There is a service called **Cost Management** which helps us check the costs we are having, where, when, make predictions, etc. We can also set **budgets**, which are linked to notifications when these are surpassed.
+
+![Cost Management](./assets/cost_management.jpg)
+
+Here, we'll find also:
+
+- Invoices
+- Scheduled reports
+- etc.
+
+### Resource Tags
+
+Every time we create a resource (e.g., a VM), we can assign tags to it; these metadata are related to costs and support. We can create cost reports by tag,for instance.
+
+Example tags:
+
+- CreatedBy
+- BillingCode
+- Department
+- (don't put any sensitive data!)
 
 ## 9. Governance and Compliance
 
