@@ -82,7 +82,8 @@ Table of contents:
     - [Azure Portal and Command Line Tools](#azure-portal-and-command-line-tools)
     - [Azure Arc](#azure-arc)
     - [Infrasturcture as Code (IaC)](#infrasturcture-as-code-iac)
-    - [ARM Templates, Azure Resource Management](#arm-templates-azure-resource-management)
+    - [ARM Templates, Azure Resource Manager](#arm-templates-azure-resource-manager)
+      - [Ex-Course: Deploying the ARM Template with the CLI](#ex-course-deploying-the-arm-template-with-the-cli)
   - [11. Monitoring](#11-monitoring)
   - [12. Basic Demos](#12-basic-demos)
     - [Create a Virtual Machine (VM)](#create-a-virtual-machine-vm)
@@ -1283,11 +1284,93 @@ See [Extra: Azure CLI/SDK](#extra-azure-clisdk) with example commands.
 
 ### Azure Arc
 
+> See and manage all your on-prem infrastructure, anywhere. It's free to get started.
 
+One possible use-case is to have our Kubernetes cluster running on premises or on AWS, for instance, and see and manage it via Azure Arc.
+
+We can register:
+
+- VMs
+- Kubernetes clusters
+- SQL servers
+- ...
 
 ### Infrasturcture as Code (IaC)
 
-### ARM Templates, Azure Resource Management
+Infrastructure: servers, storage, database and settings, network and settings, firewalls, load balancers, etc.
+
+Infrastructure is everything that is not data nor programs; it's the glue and foundations that make possible to run the programs which use the data.
+
+How can we back up the insfrastructure? IaC makes possible to do that in a config file. That way, we can even version-control that file. Thus, we can have different versions which can be re-deployed in different places.
+
+Desired State Configuration (DSC): using automation to ensure your configuration doesn't drift from the original setup. Imagine we set up a deployment in 2020; over time, the configuration changes, it drifts from the original. The idea behind DSC is having a configuration file which can be used any time.
+
+IaC options:
+
+- **ARM Templates (JSON)**
+- **Bicep: you can compile Bicep scripts into ARM Templates**
+- Terraform: 3rd Party solution from HashiCorp
+- Chef, Puppet
+- PowerShell scripts: not as flexible
+- ...
+
+### ARM Templates, Azure Resource Manager
+
+ARM Templates = Azure Resource Manager: Service that runs underneath which allows to interact with all the services.
+
+![Azure ARM](./assets/azure_arm.jpg)
+
+We work with ARM **Templates**, which are **JSON** files that contain resources and their configuration.
+
+To see how to work with those templates/JSON files, we create a new resource in the Azure portal, a *Storage Account*
+
+    Storage account, create
+    Basic
+      Subscription
+      Resource group: rg-storage-arm-test
+      Storage account name: storagearmtest42
+      Region: West Europe
+      Performance: Standard
+      Redundancy: Local (LRS)
+    Advanced: default
+    Networking: default
+    Data protection
+      Disable all
+    Encryption: default
+    Review
+    NOW: We don't click on Create, but on
+    Download a template for automation
+
+When we click on `Download a template for automation`, we get a JSON with all the configurations we clicked. Then, we can:
+
+- Click on `Download`: the JSON files ad downloaded in a ZIP. The ZIP folder is saved uncompressed into [`storage_arm_template/`](./examples/storage_arm_template/); it contains two files:
+  - [`template.json`](./examples/storage_arm_template/template.json): This file contains the actual template with the resources and configurations that will be deployed.
+  - [`parameters.json`](./examples/storage_arm_template/parameters.json): This file contains parameter values that are passed into the template during deployment, allowing you to customize the deployment without changing the template itself.
+- Add to the `Library`: we add it to a cloud repository where we have custom templates; these are like template specs.
+  - We save it in a RG.
+  - In the RG, we can go to the template and click on `Deploy`.
+  - Sometimes parameters need to be re-entered.
+- `Deploy` it.
+
+#### Ex-Course: Deploying the ARM Template with the CLI
+
+In this subsection, the downloaded JSON files are used to deploy the Storage account defined above.
+
+```bash
+cd .../examples
+az logout
+az login
+
+# Set the subscription, to be more comfortable
+az account set --subscription "<Your-Subscription-ID-or-Name>"
+az account set --subscription "Azure subscription 1"
+
+# Use the 'az deployment group create' command to deploy your ARM template to a resource group
+# The @ symbol is used to indicate that the value is coming from a file.
+az deployment group create --name StorageAccountARMDeployment1 --resource-group rg-storage-arm-test --template-file storage_arm_template/template.json --parameters @storage_arm_template/parameters.json
+
+# Now, we should see it in the Azure Portal!
+```
 
 ## 11. Monitoring
 
@@ -1806,6 +1889,9 @@ az vm open-port --port 80 --resource-group rg-newrg --name newvm
 
 # Delete a resource group and all its contents
 az group delete --name rg-newrg
+
+# Get access token (but which token?)
+az account get-access-token
 ```
 
 ## Extra: Azure Cloud Shell
