@@ -1365,7 +1365,7 @@ az login
 az account set --subscription "<Your-Subscription-ID-or-Name>"
 az account set --subscription "Azure subscription 1"
 
-# Use the 'az deployment group create' command to deploy your ARM template to a resource group
+# Use the 'az deployment group create' command to deploy your ARM template to a resource group (which has been previously created)
 # The @ symbol is used to indicate that the value is coming from a file.
 az deployment group create --name StorageAccountARMDeployment1 --resource-group rg-storage-arm-test --template-file storage_arm_template/template.json --parameters @storage_arm_template/parameters.json
 

@@ -7,6 +7,7 @@ A short guide on how to use git submodules is given in [Git Submodules](#git-sub
 - [Examples](#examples)
   - [Git Submodules](#git-submodules)
   - [`simple_web_app_test`](#simple_web_app_test)
+  - [`storage_arm_template`](#storage_arm_template)
 
 ## Git Submodules
 
@@ -82,3 +83,24 @@ The app has two functionalities; when run locally, we can access them as follows
 
 Note that neither exception handling nor logging are implemented &mdash; on purpose.
 
+## `storage_arm_template`
+
+This is an ARM template example which is able to create a simple Storage account.
+
+The resource can be created as follows
+
+```bash
+cd .../examples
+az logout
+az login
+
+# Set the subscription, to be more comfortable
+az account set --subscription "<Your-Subscription-ID-or-Name>"
+az account set --subscription "Azure subscription 1"
+
+# Use the 'az deployment group create' command to deploy your ARM template to a resource group (which has been previously created)
+# The @ symbol is used to indicate that the value is coming from a file.
+az deployment group create --name StorageAccountARMDeployment1 --resource-group rg-storage-arm-test --template-file storage_arm_template/template.json --parameters @storage_arm_template/parameters.json
+
+# Now, we should see it in the Azure Portal!
+```
