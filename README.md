@@ -85,6 +85,9 @@ Table of contents:
     - [ARM Templates, Azure Resource Manager](#arm-templates-azure-resource-manager)
       - [Ex-Course: Deploying the ARM Template with the CLI](#ex-course-deploying-the-arm-template-with-the-cli)
   - [11. Monitoring](#11-monitoring)
+    - [Azure Advisor](#azure-advisor)
+    - [Azure Service Health](#azure-service-health)
+    - [Azure Diagnostics Settings and Azure Monitor](#azure-diagnostics-settings-and-azure-monitor)
   - [12. Basic Demos](#12-basic-demos)
     - [Create a Virtual Machine (VM)](#create-a-virtual-machine-vm)
     - [Connecting to a VM](#connecting-to-a-vm)
@@ -1373,6 +1376,46 @@ az deployment group create --name StorageAccountARMDeployment1 --resource-group 
 ```
 
 ## 11. Monitoring
+
+### Azure Advisor
+
+It analyzes the resources we're using and makes recommendations based on patterns; for instance:
+
+- If we have a VM and we're not using it at its maximum capacity; then, Azure would recommend us to downsize it to a smaller one.
+- Analyze the performance of apps.
+- Security recommendations: RDP port open for a long time.
+- Suggestions on availability zones, etc.
+
+We also get expected costs if the suggestions are implemented.
+
+However, it seems that we need to create extra user accounts, since I get this error/notification:
+
+> In order for single sign on to work correctly, users must be created both in Microsoft Entra ID and the target application.
+> Open the application's admin console and follow the directions for adding users, if you haven't done so already.
+
+### Azure Service Health
+
+This tool refers to Azure regions in general, not our resources. If we plan to deploy something in a location or have something deployed, but doesn't work as expected, we can check Azure Service Health in the Portal.
+
+In the Health history tab (left menu) we can see past events.
+
+![Azure Service Health](./assets/azure_health.jpg)
+
+### Azure Diagnostics Settings and Azure Monitor
+
+We apply monitoring to the resources; for instance, in Storage account, we have:
+
+- Alerts: emails sent
+- Metrics: traffic data
+- ...
+
+We can save that information to the Dashboard, and we select the frequency with which the metrics are saved. We can also activate the diagnostic settings and save them to another storage account.
+
+Then, if we look for `Monitor` in the search bar, we see that Azure Monitor dashboard, where all logs that are being monitored are aggregated/shown. We can query the saved logs, etc. A special query language is used.
+
+In particaular, `Monitor | Log` (left menu) is interesting; that's where we can write elaborate queries with desired scopes.
+
+`Monitor | Workbooks`: sets of key metrics to follow.
 
 ## 12. Basic Demos
 
