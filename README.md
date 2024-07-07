@@ -5,7 +5,7 @@ In this repository I collect my notes on the different services provided by Clou
 I have structured the project in the following sections:
 
 - [`01_fundamentals/`](./01_fundamentals/): Contents for the [Exam AZ-900: Microsoft Azure Fundamentals](https://learn.microsoft.com/en-us/credentials/certifications/exams/az-900/). Created after following the Udemy tutorial/course by Scott Duffy [AZ-900: Microsoft Azure Fundamentals Exam Prep](https://www.udemy.com/course/az900-azure/).
-[`02_developer/`](./02_developer/): Contents for the [Exam AZ-204: Microsoft Azure Developer Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-developer/). To be done...
+- [`02_developer/`](./02_developer/): Contents for the [Exam AZ-204: Microsoft Azure Developer Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-developer/). To be done...
 <!--
 - [`02_developer/`](./02_developer/): Contents for the [Exam AZ-204: Microsoft Azure Developer Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-developer/). Created after following the Udacity [**Cloud Developer using Microsoft Azure Nanodegree**](https://www.udacity.com/course/cloud-developer-using-microsoft-azure-nanodegree--nd081).
 <!--
