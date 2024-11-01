@@ -1,10 +1,6 @@
-# Guide for the Microsoft Azure Developer Associate Certification (AZ-204)
+# Guide for the Microsoft Azure Administrator Associate (AZ-204)
 
-This section has my notes to prepare the [Exam AZ-204: Microsoft Azure Developer Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-developer/).
-
-<!--
-I created these notes following the Udacity [**Cloud Developer using Microsoft Azure Nanodegree**](https://www.udacity.com/course/cloud-developer-using-microsoft-azure-nanodegree--nd081)..
--->
+This section has my notes to prepare the [Exam AZ-104: Microsoft Azure Administrator Associate](https://learn.microsoft.com/en-us/credentials/certifications/azure-administrator/).
 
 Mikel Sagardia, 2024.  
 No guarantees.
@@ -12,4 +8,3 @@ No guarantees.
 :construction:
 
 TBD.
-
