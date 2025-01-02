@@ -1421,7 +1421,14 @@ In particaular, `Monitor | Log` (left menu) is interesting; that's where we can 
 
 First, create an Azure account; I created one with the Github credentials.
 
+- The first time, we can have a Free Azure account.
+- After the Free period finishes, we need to upgrade it; we can do that by selecting
+  - Pay-as-you-go, then Basic
+  - Add a card
+
 After that, we basically open the [Azure portal](https://portal.azure.com).
+
+The first time, we might need to be requested to create a Subscription.
 
 This section is very interesting, because we see in practice the features of the difference services/resources.
 
